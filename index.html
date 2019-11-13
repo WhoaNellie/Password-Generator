@@ -13,10 +13,14 @@
     <h2>Generate a Password</h2>
 
         <h3>Select Criteria</h3>
-        <input type="checkbox" name="lowercase" value="lower"> Lowercase letters<br>
-        <input type="checkbox" name="uppercase" value="upper"> Uppercase letters<br>
-        <input type="checkbox" name="numeric" value="numbers"> Numbers 0-9 <br>
-        <input type="checkbox" name="special" value="special"> Special characters (? ! . _ , etc.)<br>
+
+        Password Length: <input type="range" id="len" min="8" max="128">
+
+        <input type="checkbox" name="lowercase" id="lower"> Lowercase letters<br>
+        <input type="checkbox" name="uppercase" id="upper"> Uppercase letters<br>
+        <input type="checkbox" name="numeric" id="number"> Numbers 0-9 <br>
+        <input type="checkbox" name="special" id="special"> Special characters (? ! . _ , etc.)<br>
+        <input type="checkbox" name="selAll" id="all"> Select all<br>
 
 
     <textarea
@@ -25,16 +29,65 @@
       placeholder="Your Secure Password"
       aria-label="Generated Password"
     ></textarea>
+
     <button id="generate">Generate Password</button>
     <button id="copy">
       Copy to Clipboard
     </button>
+
   </body>
   <script type="text/javascript">
-    var ucArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-    var lcArr = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-    var specArr = ['\u0020', '\u0021', '\u0022', '\u0023', '\u0024', '\u0025', '\u0026', '\u0027','\u0028', '\u0029', '\u002A', '\u002B', '\u002C', '\u002D', '\u002E', '\u002F', '\u003A', '\u003B', '\u003C', '\u003D', '\u003E', '\u003F', '\u0040', '\u005B', '\u005C', '\u005D', '\u005E', '\u005F', '\u0060', '\u007B', '\u007C', '\u007D', '\u007E']
-    var intArr =['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-  
+
+    var lcAlph = "abcdefghijklmnopqrstuvwqyz";
+    var ucAlph = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    var specChar = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
+    var intStr = "0123456789";
+    
+    var passLen = document.getElementById("len").value;
+
+    var checkLow = document.getElementById("lower");
+    var checkUp = document.getElementById("upper");
+    var checkNum = document.getElementById("number");
+    var checkSpec = document.getElementById("special");
+    var checkAll = document.getElementById("all");
+
+    var selectFrom = "";
+    var genPass = "";
+
+        
+        if (checkLow.checked == true){
+            selectFrom = selectFrom + lcAlph;
+        }
+
+        if (checkUp.checked == true){
+            selectFrom = selectFrom + ucAlph;
+        }
+
+        if (checkSpec.checked == true){
+            selectFrom = selectFrom + specChar;
+        }
+
+        if (checkNum.checked == true){
+            selectFrom = selectFrom + intStr;
+        }
+
+        if(checkAll.checked == true){
+            selectFrom = lcAlph + ucAlph + specChar + intStr;
+        }
+
+        if(
+            checkLow.checked == false &&
+            checkUp.checked == false &&
+            checkSpec.checked == false &&
+            checkNum.checked == false &&
+            checkAll.checked == false
+        ){
+            alert("Please check at least one password criteria");
+        }
+    
+
+
+    console.log(Math.floor(Math.random() * 26));
+
   </script>
 </html>
