@@ -24,14 +24,13 @@
 
 
     <textarea
-      readonly
       id="password"
       placeholder="Your Secure Password"
       aria-label="Generated Password"
     ></textarea>
 
     <button id="generate">Generate Password</button>
-    <button id="copy">
+    <button onclick="clipText()" id="copy">
       Copy to Clipboard
     </button>
 
@@ -66,7 +65,7 @@
             !checkNum.checked &&
             !checkAll.checked
         ){
-            alert("Please check at least one password criteria");
+            alert("Please select at least one password criteria");
         }
 
         
@@ -111,5 +110,11 @@
             }
         }while(!passOk(genPass))
 
+        function clipText() {
+            var copyText = document.getElementById("password");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999)
+            document.execCommand("copy");
+        }
   </script>
 </html>
