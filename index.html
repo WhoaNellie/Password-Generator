@@ -38,10 +38,10 @@
   </body>
   <script type="text/javascript">
 
-    var lcAlph = "abcdefghijklmnopqrstuvwqyz";
-    var ucAlph = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    var specChar = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
+    var lcStr = "abcdefghijklmnopqrstuvwqyz";
+    var ucStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     var intStr = "0123456789";
+    var specStr = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
     
     var passLen = document.getElementById("len").value;
 
@@ -54,28 +54,6 @@
     var selectFrom = "";
     var genPass = "";
 
-    selectFrom =
-        (checkLow.checked ? lcAlph : '') + 
-        (checkUp.checked ? ucAlph : '');
-
-        if (checkLow.checked == true){
-            selectFrom = selectFrom + lcAlph;
-        
-        }
-        if (checkUp.checked == true){
-            selectFrom = selectFrom + ucAlph;
-        }
-        if (checkSpec.checked == true){
-            selectFrom = selectFrom + specChar;
-        }
-        if (checkNum.checked == true){
-            selectFrom = selectFrom + intStr;
-        }
-
-        if (checkAll.checked == true){
-            selectFrom = lcAlph + ucAlph + specChar + intStr;
-        }
-
         if (
             checkLow.checked == false &&
             checkUp.checked == false &&
@@ -86,9 +64,14 @@
             alert("Please check at least one password criteria");
         }
 
+        selectFrom =
+        (checkLow.checked ? lcStr : '') + 
+        (checkUp.checked ? ucStr : '') +
+        (checkNum.checked ? intStr : '') +
+        (checkSpec.checked ? specStr : '');
         
         function passOk(pass) {
-
+            
         }
 
         while(!passOk(genPass)){
