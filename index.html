@@ -39,9 +39,13 @@
   <script type="text/javascript">
 
     var lcStr = "abcdefghijklmnopqrstuvwqyz";
+        var lcRegex = RegExp ("abcdefghijklmnopqrstuvwqyz");
     var ucStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        var ucRegex = RegExp ("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
     var intStr = "0123456789";
+        var intRegex = RegExp ("0123456789");
     var specStr = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+        var specRegex = RegExp (" !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~");
     
     var passLen = document.getElementById("len").value;
 
@@ -54,33 +58,58 @@
     var selectFrom = "";
     var genPass = "";
 
+        // on generate click
         if (
-            checkLow.checked == false &&
-            checkUp.checked == false &&
-            checkSpec.checked == false &&
-            checkNum.checked == false &&
-            checkAll.checked == false
+            !checkLow.checked &&
+            !checkUp.checked &&
+            !checkSpec.checked &&
+            !checkNum.checked &&
+            !checkAll.checked
         ){
             alert("Please check at least one password criteria");
         }
 
-        selectFrom =
-        (checkLow.checked ? lcStr : '') + 
-        (checkUp.checked ? ucStr : '') +
-        (checkNum.checked ? intStr : '') +
-        (checkSpec.checked ? specStr : '');
         
-        function passOk(pass) {
-            
+        selectFrom =
+        (checkAll.checked || checkLow.checked ? lcStr : '') + 
+        (checkAll.checked || checkUp.checked ? ucStr : '') +
+        (checkAll.checked || checkNum.checked ? intStr : '') +
+        (checkAll.checked || checkSpec.checked ? specStr : '');
+        
+        function passOk (pWord){
+            if (
+                (checkLow.checked && !lcRegex.test(pWord))||
+                (checkUp.checked && !ucRegex.text(pWord)) ||
+                (checkNum.checked && !intRegex.text(pWord))||
+                (checkSpec.checked && !specRegex.text(pWord))
+            ){ 
+
+                return false;
+
+            }else if (checkAll.checked && 
+                (
+                    !lcRegex.test(pWord) ||
+                    !ucRegex.text(pWord) ||
+                    !intRegex.text(pWord)||
+                    !specRegex.text(pWord)
+                )){
+
+                    return false;
+
+            }else{
+
+                return true;
+            }
+
         }
 
-        while(!passOk(genPass)){
+        do{
             genPass = "";
             for (var i = 0; i < passLen; i++){
                 var rand = Math.floor(Math.random() * selectFrom.length);
                 genPass = genPass + selectFrom.charAt(rand);
             }
-        }
+        }while(!passOk(genPass))
 
   </script>
 </html>
