@@ -54,28 +54,29 @@
     var selectFrom = "";
     var genPass = "";
 
-        
+    selectFrom =
+        (checkLow.checked ? lcAlph : '') + 
+        (checkUp.checked ? ucAlph : '');
+
         if (checkLow.checked == true){
             selectFrom = selectFrom + lcAlph;
+        
         }
-
         if (checkUp.checked == true){
             selectFrom = selectFrom + ucAlph;
         }
-
         if (checkSpec.checked == true){
             selectFrom = selectFrom + specChar;
         }
-
         if (checkNum.checked == true){
             selectFrom = selectFrom + intStr;
         }
 
-        if(checkAll.checked == true){
+        if (checkAll.checked == true){
             selectFrom = lcAlph + ucAlph + specChar + intStr;
         }
 
-        if(
+        if (
             checkLow.checked == false &&
             checkUp.checked == false &&
             checkSpec.checked == false &&
@@ -84,10 +85,19 @@
         ){
             alert("Please check at least one password criteria");
         }
-    
 
+        
+        function passOk(pass) {
 
-    console.log(Math.floor(Math.random() * 26));
+        }
+
+        while(!passOk(genPass)){
+            genPass = "";
+            for (var i = 0; i < passLen; i++){
+                var rand = Math.floor(Math.random() * selectFrom.length);
+                genPass = genPass + selectFrom.charAt(rand);
+            }
+        }
 
   </script>
 </html>
