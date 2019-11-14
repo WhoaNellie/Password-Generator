@@ -37,50 +37,33 @@
   </body>
   <script type="text/javascript">
 
-    var lcStr = "abcdefghijklmnopqrstuvwqyz";
-        var lcRegex = RegExp ("abcdefghijklmnopqrstuvwqyz");
-    var ucStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        var ucRegex = RegExp ("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-    var intStr = "0123456789";
-        var intRegex = RegExp ("0123456789");
-    var specStr = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
-        var specRegex = RegExp (" !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~");
+    let lcStr = "abcdefghijklmnopqrstuvwqyz";
+        let lcRegex = /[a-z]/;
+    let ucStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        let ucRegex = /[A-Z]/;
+    let intStr = "0123456789";
+        let intRegex = /\d/;
+    let specStr = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+        let specRegex = /\W/;
     
-    var passLen = document.getElementById("len").value;
+    let passLen = document.getElementById("len").value;
 
-    var checkLow = document.getElementById("lower");
-    var checkUp = document.getElementById("upper");
-    var checkNum = document.getElementById("number");
-    var checkSpec = document.getElementById("special");
-    var checkAll = document.getElementById("all");
+    let checkLow = document.getElementById("lower");
+    let checkUp = document.getElementById("upper");
+    let checkNum = document.getElementById("number");
+    let checkSpec = document.getElementById("special");
+    let checkAll = document.getElementById("all");
 
-    var selectFrom = "";
-    var genPass = "";
+    let selectFrom = "";
+    let password = "";
 
-        // on generate click
-        if (
-            !checkLow.checked &&
-            !checkUp.checked &&
-            !checkSpec.checked &&
-            !checkNum.checked &&
-            !checkAll.checked
-        ){
-            alert("Please select at least one password criteria");
-        }
-
-        
-        selectFrom =
-        (checkAll.checked || checkLow.checked ? lcStr : '') + 
-        (checkAll.checked || checkUp.checked ? ucStr : '') +
-        (checkAll.checked || checkNum.checked ? intStr : '') +
-        (checkAll.checked || checkSpec.checked ? specStr : '');
-        
+       
         function passOk (pWord){
             if (
                 (checkLow.checked && !lcRegex.test(pWord))||
-                (checkUp.checked && !ucRegex.text(pWord)) ||
-                (checkNum.checked && !intRegex.text(pWord))||
-                (checkSpec.checked && !specRegex.text(pWord))
+                (checkUp.checked && !ucRegex.test(pWord)) ||
+                (checkNum.checked && !intRegex.test(pWord))
+                // || (checkSpec.checked && !specRegex.test(pWord))
             ){ 
 
                 return false;
@@ -88,9 +71,9 @@
             }else if (checkAll.checked && 
                 (
                     !lcRegex.test(pWord) ||
-                    !ucRegex.text(pWord) ||
-                    !intRegex.text(pWord)||
-                    !specRegex.text(pWord)
+                    !ucRegex.test(pWord) ||
+                    !intRegex.test(pWord)
+                    // || !specRegex.test(pWord)
                 )){
 
                     return false;
@@ -102,16 +85,39 @@
 
         }
 
-        do{
-            genPass = "";
-            for (var i = 0; i < passLen; i++){
-                var rand = Math.floor(Math.random() * selectFrom.length);
-                genPass = genPass + selectFrom.charAt(rand);
+        function passGen(){
+            if (
+            !checkLow.checked &&
+            !checkUp.checked &&
+            !checkSpec.checked &&
+            !checkNum.checked &&
+            !checkAll.checked
+            ){
+                alert("Please select at least one password criteria");
             }
-        }while(!passOk(genPass))
+
+            selectFrom = (
+                ((checkAll.checked || checkLow.checked) ? lcStr : '') + 
+                ((checkAll.checked || checkUp.checked )? ucStr : '') +
+                ((checkAll.checked || checkNum.checked) ? intStr : '')
+                );
+                // + (checkAll.checked || checkSpec.checked ? specStr : '');
+                
+
+
+            do{
+                password = "";
+                for (let i = 0; i < Number(passLen); i++){
+                    let rand = Math.floor(Math.random() * selectFrom.length);
+                    password = password + selectFrom.charAt(rand);
+                    console.log(password);
+                    // debugger;
+                }
+            }while(!passOk(password))
+        }
 
         function clipText() {
-            var copyText = document.getElementById("password");
+            let copyText = document.getElementById("password");
             copyText.select();
             copyText.setSelectionRange(0, 99999)
             document.execCommand("copy");
