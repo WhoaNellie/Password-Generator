@@ -60,20 +60,20 @@
        
         function passOk (pWord){
             if (
-                (checkLow.checked && !lcRegex.test(pWord))||
-                (checkUp.checked && !ucRegex.test(pWord)) ||
-                (checkNum.checked && !intRegex.test(pWord))
-                // || (checkSpec.checked && !specRegex.test(pWord))
+                (checkLow.checked && !lcRegex.test(pWord))  ||
+                (checkUp.checked && !ucRegex.test(pWord))   ||
+                (checkNum.checked && !intRegex.test(pWord)) ||
+                (checkSpec.checked && !specRegex.test(pWord))
             ){ 
 
                 return false;
 
             }else if (checkAll.checked && 
                 (
-                    !lcRegex.test(pWord) ||
-                    !ucRegex.test(pWord) ||
-                    !intRegex.test(pWord)
-                    // || !specRegex.test(pWord)
+                    !lcRegex.test(pWord)  ||
+                    !ucRegex.test(pWord)  ||
+                    !intRegex.test(pWord) ||
+                    !specRegex.test(pWord)
                 )){
 
                     return false;
@@ -97,11 +97,12 @@
             }
 
             selectFrom = (
-                ((checkAll.checked || checkLow.checked) ? lcStr : '') + 
-                ((checkAll.checked || checkUp.checked )? ucStr : '') +
-                ((checkAll.checked || checkNum.checked) ? intStr : '')
+                ((checkAll.checked || checkLow.checked) ? lcStr : '')  + 
+                ((checkAll.checked || checkUp.checked )? ucStr : '')   +
+                ((checkAll.checked || checkNum.checked) ? intStr : '') + 
+                (checkAll.checked || checkSpec.checked ? specStr : '')
                 );
-                // + (checkAll.checked || checkSpec.checked ? specStr : '');
+                
                 
 
 
