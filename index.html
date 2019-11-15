@@ -14,30 +14,35 @@
     <header>
       <h1>Password Generator</h1>
     </header>
-    <h2>Generate a Password</h2>
+    <div class="container">
+            <h2>Generate a Password</h2>
 
-        <h3>Select Criteria</h3>
+                <h3>Select your password criteria:</h3>
 
-        <label>Password Length (8-128 characters):</label> <input type="range" id="len" min="8" max="128">
+                <div class="criteria">
 
-        <input type="checkbox" name="lowercase" id="lower"> <label for="lower">Lowercase letters</label>
-        <input type="checkbox" name="uppercase" id="upper"> <label for="upper">Uppercase letters</label>
-        <input type="checkbox" name="numeric" id="number"> <label for="number">Numbers 0-9</label>
-        <input type="checkbox" name="special" id="special"> <label for="special">Special characters (? ! . _ , etc.)</label>
-        <input type="checkbox" name="selAll" id="all"> <label for="all">Select all</label>
+                    <label>Password Length (8-128 characters):</label> <input type="range" id="len" min="8" max="128">
+
+                    <input type="checkbox" name="lowercase" id="lower"> <label for="lower">Lowercase letters</label>
+                    <input type="checkbox" name="uppercase" id="upper"> <label for="upper">Uppercase letters</label>
+                    <input type="checkbox" name="numeric" id="number"> <label for="number">Numbers 0-9</label>
+                    <input type="checkbox" name="special" id="special"> <label for="special">Special characters (? ! . _ , etc.)</label>
+                    <input type="checkbox" name="selAll" id="all"> <label for="all">Select all</label>
+
+                </div>
 
 
-    <textarea
-      id="password"
-      placeholder="Your Secure Password"
-      aria-label="Generated Password"
-    ></textarea>
+            <textarea
+            id="password"
+            placeholder="Your Secure Password"
+            aria-label="Generated Password"
+            ></textarea>
 
-    <button onclick="passGen()" id="generate">Generate Password</button>
-    <button onclick="clipText()" id="copy">
-      Copy to Clipboard
-    </button>
-
+            <button onclick="passGen()" id="generate">Generate Password</button>
+            <button onclick="clipText()" id="copy">
+            Copy to Clipboard
+            </button>
+    </div>
   </body>
   <script type="text/javascript">
 
