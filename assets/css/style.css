@@ -1,6 +1,6 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
-    background-color: rgb(226, 226, 226);
+    background-color: rgb(230, 232, 232);
 }
 
 
@@ -15,6 +15,7 @@ h1{
 .container{
     background-color: white;
     margin: 20px auto;
+    border-radius: 5px;
     padding: 25px;
     width: 95%;
     max-width: 900px;
@@ -39,14 +40,42 @@ h1{
         flex-direction: column;
     }
 
-    button{
-        padding: 5px;
-        width: 33%;
-        height: 40px;
-        border-radius: 40px;
-        border-width: 2px 4px;
-        border: none;
-
-        font-size: 18pt;
-        color: white;
+    textarea{
+        display: block;
+        margin: 10px auto;
+        padding: 10px;
+        border: 2px dashed grey;
+        border-radius: 7px;
+        width: 95%;
+        min-height: 100px;
+        text-align: center;
     }
+
+    textarea[placeholder]{
+        vertical-align: middle;
+    }
+
+    .butts{
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+    }
+        button{
+            padding: 5px;
+            width: 33%;
+            height: 40px;
+            border-radius: 40px;
+            border-width: 2px 4px;
+            border: none;
+
+            font-size: 18pt;
+            color: white;
+        }
+
+            #generate{
+                background-color: rgb(163, 6, 6);
+            }
+
+            #copy{
+                background-color: rgb(138, 136, 136);
+            }
