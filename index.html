@@ -29,7 +29,7 @@
       aria-label="Generated Password"
     ></textarea>
 
-    <button id="generate">Generate Password</button>
+    <button onclick="passGen()" id="generate">Generate Password</button>
     <button onclick="clipText()" id="copy">
       Copy to Clipboard
     </button>
@@ -53,6 +53,8 @@
     let checkNum = document.getElementById("number");
     let checkSpec = document.getElementById("special");
     let checkAll = document.getElementById("all");
+
+    let passField = document.getElementById("password");
 
     let selectFrom = "";
     let password = "";
@@ -100,7 +102,7 @@
                 ((checkAll.checked || checkLow.checked) ? lcStr : '')  + 
                 ((checkAll.checked || checkUp.checked )? ucStr : '')   +
                 ((checkAll.checked || checkNum.checked) ? intStr : '') + 
-                (checkAll.checked || checkSpec.checked ? specStr : '')
+                 (checkAll.checked || checkSpec.checked ? specStr : '')
                 );
                 
 
@@ -110,7 +112,7 @@
                     let rand = Math.floor(Math.random() * selectFrom.length);
                     password = password + selectFrom.charAt(rand);
                     console.log(password);
-                    // debugger;
+                    passField.value = password;
                 }
             }while(!passOk(password))
         }
