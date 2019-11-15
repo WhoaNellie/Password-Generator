@@ -37,6 +37,20 @@ h1{
         flex-direction: column;
     }
 
+        #len{
+            width: 100%;
+        }
+
+        #valBox{
+            background-color: white;
+            font-size: 14pt;
+            max-width: 150px;
+            text-align: center;
+            padding: 5px;
+            margin: 0 auto;
+            border-radius: 5px;
+        }
+
         .criteria span{
             margin: 3px;
         }
