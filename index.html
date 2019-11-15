@@ -46,7 +46,6 @@
     let specStr = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
         let specRegex = /\W/;
     
-    let passLen = document.getElementById("len").value;
 
     let checkLow = document.getElementById("lower");
     let checkUp = document.getElementById("upper");
@@ -108,6 +107,7 @@
 
             do{
                 password = "";
+                let passLen = document.getElementById("len").value;
                 for (let i = 0; i < Number(passLen); i++){
                     let rand = Math.floor(Math.random() * selectFrom.length);
                     password = password + selectFrom.charAt(rand);
