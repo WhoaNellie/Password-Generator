@@ -9,6 +9,101 @@
     <link rel="stylesheet" href="assets/css/style.css">
     
     <title>Password Generator</title>
+
+    <script>
+            let lcStr = "abcdefghijklmnopqrstuvwqyz";
+                let lcRegex = /[a-z]/;
+            let ucStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                let ucRegex = /[A-Z]/;
+            let intStr = "0123456789";
+                let intRegex = /\d/;
+            let specStr = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+                let specRegex = /\W/;
+            
+        
+            let checkLow = document.getElementById("lower");
+            let checkUp = document.getElementById("upper");
+            let checkNum = document.getElementById("number");
+            let checkSpec = document.getElementById("special");
+            let checkAll = document.getElementById("all");
+        
+            let passField = document.getElementById("password");
+        
+            let selectFrom = "";
+            let password = "";
+            
+        
+            function updateSlideVal(val) {
+                  document.getElementById("len").value = val;
+                  let valBox = document.getElementById("valBox");
+                  valBox.textContent = val + " characters";
+            }
+               
+            function passOk (pWord){
+                if (
+                    (checkLow.checked && !lcRegex.test(pWord))  ||
+                    (checkUp.checked && !ucRegex.test(pWord))   ||
+                    (checkNum.checked && !intRegex.test(pWord)) ||
+                    (checkSpec.checked && !specRegex.test(pWord))
+                ){ 
+        
+                    return false;
+        
+                }else if (checkAll.checked && 
+                    (
+                        !lcRegex.test(pWord)  ||
+                        !ucRegex.test(pWord)  ||
+                        !intRegex.test(pWord) ||
+                        !specRegex.test(pWord)
+                    )){
+        
+                        return false;
+        
+                }else{
+        
+                    return true;
+                }
+        
+            }
+        
+            function passGen(){
+                if (
+                    !checkLow.checked  &&
+                    !checkUp.checked   &&
+                    !checkSpec.checked &&
+                    !checkNum.checked  &&
+                    !checkAll.checked
+                ){
+                    alert("Please select at least one password criteria");
+                }
+        
+                selectFrom = (
+                    ((checkAll.checked || checkLow.checked) ? lcStr : '')  + 
+                    ((checkAll.checked || checkUp.checked )? ucStr : '')   +
+                    ((checkAll.checked || checkNum.checked) ? intStr : '') + 
+                     (checkAll.checked || checkSpec.checked ? specStr : '')
+                    );
+                    
+        
+                do{
+                    password = "";
+                    let passLen = document.getElementById("len").value;
+                    for (let i = 0; i < Number(passLen); i++){
+                        let rand = Math.floor(Math.random() * selectFrom.length);
+                        password = password + selectFrom.charAt(rand);
+                        // console.log(password);
+                        passField.value = password;
+                    }
+                }while(!passOk(password))
+            }
+        
+            function clipText() {
+                let copyText = document.getElementById("password");
+                copyText.select();
+                copyText.setSelectionRange(0, 99999)
+                document.execCommand("copy");
+            }
+    </script>
   </head>
   <body>
     <header>
@@ -22,10 +117,10 @@
                 <div class="criteria">
 
                     <label>Password Length (8 - 128 characters):</label> 
-                    <span>
+                    <div class="inputWrap">
                         <input type="range" id="len" min="8" max="128" onchange="updateSlideVal(this.value)">
                         <div id="valBox">68 characters</div>
-                    </span>
+                    </div>
 
                     <span>
                     <input type="checkbox" name="lowercase" id="lower"> <label for="lower">Lowercase letters</label>
@@ -65,99 +160,4 @@
             </div>
     </div>
   </body>
-  <script type="text/javascript">
-
-    let lcStr = "abcdefghijklmnopqrstuvwqyz";
-        let lcRegex = /[a-z]/;
-    let ucStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        let ucRegex = /[A-Z]/;
-    let intStr = "0123456789";
-        let intRegex = /\d/;
-    let specStr = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
-        let specRegex = /\W/;
-    
-
-    let checkLow = document.getElementById("lower");
-    let checkUp = document.getElementById("upper");
-    let checkNum = document.getElementById("number");
-    let checkSpec = document.getElementById("special");
-    let checkAll = document.getElementById("all");
-
-    let passField = document.getElementById("password");
-
-    let selectFrom = "";
-    let password = "";
-    
-
-    function updateSlideVal(val) {
-          document.getElementById("len").value = val;
-          let valBox = document.getElementById("valBox");
-          valBox.textContent = val + " characters";
-    }
-       
-    function passOk (pWord){
-        if (
-            (checkLow.checked && !lcRegex.test(pWord))  ||
-            (checkUp.checked && !ucRegex.test(pWord))   ||
-            (checkNum.checked && !intRegex.test(pWord)) ||
-            (checkSpec.checked && !specRegex.test(pWord))
-        ){ 
-
-            return false;
-
-        }else if (checkAll.checked && 
-            (
-                !lcRegex.test(pWord)  ||
-                !ucRegex.test(pWord)  ||
-                !intRegex.test(pWord) ||
-                !specRegex.test(pWord)
-            )){
-
-                return false;
-
-        }else{
-
-            return true;
-        }
-
-    }
-
-    function passGen(){
-        if (
-            !checkLow.checked  &&
-            !checkUp.checked   &&
-            !checkSpec.checked &&
-            !checkNum.checked  &&
-            !checkAll.checked
-        ){
-            alert("Please select at least one password criteria");
-        }
-
-        selectFrom = (
-            ((checkAll.checked || checkLow.checked) ? lcStr : '')  + 
-            ((checkAll.checked || checkUp.checked )? ucStr : '')   +
-            ((checkAll.checked || checkNum.checked) ? intStr : '') + 
-             (checkAll.checked || checkSpec.checked ? specStr : '')
-            );
-            
-
-        do{
-            password = "";
-            let passLen = document.getElementById("len").value;
-            for (let i = 0; i < Number(passLen); i++){
-                let rand = Math.floor(Math.random() * selectFrom.length);
-                password = password + selectFrom.charAt(rand);
-                // console.log(password);
-                passField.value = password;
-            }
-        }while(!passOk(password))
-    }
-
-    function clipText() {
-        let copyText = document.getElementById("password");
-        copyText.select();
-        copyText.setSelectionRange(0, 99999)
-        document.execCommand("copy");
-    }
-  </script>
 </html>
