@@ -21,7 +21,7 @@
 
                 <div class="criteria">
 
-                    <label>Password Length (8-128 characters):</label> 
+                    <label>Password Length (8 - 128 characters):</label> 
                     <span>
                         <input type="range" id="len" min="8" max="128" onchange="updateSlideVal(this.value)">
                         <div id="valBox">68 characters</div>
@@ -73,7 +73,7 @@
         let ucRegex = /[A-Z]/;
     let intStr = "0123456789";
         let intRegex = /\d/;
-    let specStr = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+    let specStr = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
         let specRegex = /\W/;
     
 
@@ -124,11 +124,11 @@
 
     function passGen(){
         if (
-        !checkLow.checked  &&
-        !checkUp.checked   &&
-        !checkSpec.checked &&
-        !checkNum.checked  &&
-        !checkAll.checked
+            !checkLow.checked  &&
+            !checkUp.checked   &&
+            !checkSpec.checked &&
+            !checkNum.checked  &&
+            !checkAll.checked
         ){
             alert("Please select at least one password criteria");
         }
@@ -147,7 +147,7 @@
             for (let i = 0; i < Number(passLen); i++){
                 let rand = Math.floor(Math.random() * selectFrom.length);
                 password = password + selectFrom.charAt(rand);
-                console.log(password);
+                // console.log(password);
                 passField.value = password;
             }
         }while(!passOk(password))
