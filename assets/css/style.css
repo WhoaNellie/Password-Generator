@@ -109,3 +109,7 @@ h1{
             #copy{
                 background-color: rgb(138, 136, 136);
             }
+
+            #copy:active{
+                background-color: rgb(73, 73, 73);
+            }
