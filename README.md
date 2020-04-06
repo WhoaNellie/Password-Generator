@@ -10,7 +10,7 @@ To install this project all you need to do is download the repository and open i
 
 To use this project, select the criteria you wish for your password to contain (upper/lower case letters, special characters, numbers) and the password length. Then click the "Generate Password" button. 
 
-Your password will appear in the textarea and you may change it my manually typing in your edits. Then you may cope the password to your clipboard using the "Copy to Clipboard" button.
+Your password will appear in the textarea and you may change it my manually typing in your edits. Then you may copy the password to your clipboard using the "Copy to Clipboard" button.
 
 
 ## License
